@@ -1,26 +1,39 @@
+<!-- Paul Amana's Portfolio Website -->
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Meta tags for character encoding and responsive design -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>portfolio website</title>
+    
+    <!-- CSS Stylesheets -->
+    <!-- Main styles for layout and components -->
     <link rel="stylesheet" href="css/style.css" />
+    <!-- Theme styles for light/dark mode -->
     <link rel="stylesheet" href="css/themes.css" />
+    <!-- Reusable component styles -->
     <link rel="stylesheet" href="css/components.css" />
+    <!-- Animation and transition styles -->
     <link rel="stylesheet" href="css/animations.css" />
   </head>
   <body>
+    <!-- Navigation Header with Logo and Menu -->
     <header>
+      <!-- Left section with portfolio name/logo -->
       <div class="head-left">
         <h1 id="name">Paul Amana</h1>
       </div>
 
+      <!-- Right section with navigation links and theme toggle -->
       <div class="head-right">
         <nav class="navbar">
+          <!-- Navigation links -->
           <a href="#home">Home</a>
           <a href="#about">About</a>
           <a href="projects.html">Projects</a>
           <a href="#contact">Contact</a>
+          <!-- Theme toggle button for light/dark mode -->
           <button id="theme-button">
             <span id="theme-icon">🌙</span>
           </button>
@@ -28,7 +41,9 @@
       </div>
     </header>
 
+    <!-- Hero Section: Introduction with profile image and call-to-action buttons -->
     <section id="home" class="hero-section">
+      <!-- Left side: Profile image -->
       <div class="hero-left">
         <img
           src="assets/images/profile.jpeg"
@@ -36,10 +51,13 @@
           class="hero-image"
         />
       </div>
+      <!-- Right side: Introduction text and action buttons -->
       <div class="hero-right">
+        <!-- Greeting and name -->
         <p>Hello, I'm</p>
         <h1 class="hero-name">Paul Amana</h1>
         <h3 class="hero-title">Applied Computer Science Student</h3>
+        <!-- Brief professional description -->
         <p class="hero-description">
           A passionate Applied Computer Science student creating innovative
           <br />
@@ -47,10 +65,13 @@
           writing <br />
           clean code and building exceptional user experiences.
         </p>
+        <!-- Action buttons for portfolio navigation -->
         <div class="hero-buttons">
+          <!-- Primary button: View Projects -->
           <button class="btn btn-primary">
             <a href="projects.html" class="btn btn-primary">View Projects</a>
           </button>
+          <!-- Secondary button: Download Resume -->
           <button class="btn btn-secondary">
             <a href="assets/resume.pdf" class="btn btn-secondary" download>
               Download Resume
@@ -59,52 +80,64 @@
         </div>
       </div>
     </section>
+    
+    <!-- About Section: Personal background and skills focus -->
     <section id="about" class="about-me">
       <h2>About Me</h2>
+      <!-- Two-column layout: Image and About text -->
       <div class="divider">
+        <!-- Left: About section image -->
         <div class="about-me_left">
-        <img src="assets/images/profile.jpeg" alt="About Me Picture" class="about-me-image"/>
-      </div>
-      <div class="about-me_right">
-        <p>
-          I'm a second-year Applied Computer Science student at Dalhousie
-          University with a passion for <br />
-          creating innovative web solutions and exploring cutting-edge
-          technologies. <br />
-          My journey in computer science began with curiosity about how websites
-          work, and has evolved into a <br />
-          deep appreciation for clean code, user experience, and problem-solving
-          through technology.<br />
-          <span id="blue">What I'm focused on:</span>
-        </p>
-        <p class="check-mark">
-          ✅ Web Development: Building responsive and user-friendly websites
-          using HTML, CSS, JavaScript.
-        </p>
-        <p>
-          ✅ Mobile Development: Creating cross-platform mobile applications
-          using Flutter.
-        </p>
-        <p>
-          ✅ UI/UX Design: Creating intuitive and engaging user interfaces with a
-          focus on usability.
-        </p>
-        <p>
-          ✅ Database Management: Designing and managing databases using SQL and
-          NoSQL technologies.
-        </p>
-        <p>
-          ✅ Java Development: Writing efficient and scalable Java applications.
-        </p>
-        <p>
-          ✅ Version Control: Utilizing Git and GitHub for efficient code
-          collaboration and version management.
-        </p>
-        <p>
-          When I'm not coding, you can find me exploring new technologies, playing
-          the drums, or enjoying outdoor activities.
-        </p>
-      </div>
+          <img
+            src="assets/images/profile.jpeg"
+            alt="About Me Picture"
+            class="about-me-image"
+          />
+        </div>
+        <!-- Right: About text and skills list -->
+        <div class="about-me_right">
+          <!-- Background and introduction -->
+          <p>
+            I'm a second-year Applied Computer Science student at Dalhousie
+            University with a passion for <br />
+            creating innovative web solutions and exploring cutting-edge
+            technologies. <br />
+            My journey in computer science began with curiosity about how
+            websites work, and has evolved into a <br />
+            deep appreciation for clean code, user experience, and
+            problem-solving through technology.<br />
+            <span id="blue">What I'm focused on:</span>
+          </p>
+          <!-- Skills list with checkmarks -->
+          <p class="check-mark">
+            ✅ Web Development: Building responsive and user-friendly websites
+            using HTML, CSS, JavaScript.
+          </p>
+          <p>
+            ✅ Mobile Development: Creating cross-platform mobile applications
+            using Flutter.
+          </p>
+          <p>
+            ✅ UI/UX Design: Creating intuitive and engaging user interfaces
+            with a focus on usability.
+          </p>
+          <p>
+            ✅ Database Management: Designing and managing databases using SQL
+            and NoSQL technologies.
+          </p>
+          <p>
+            ✅ Java Development: Writing efficient and scalable Java
+            applications.
+          </p>
+          <p>
+            ✅ Version Control: Utilizing Git and GitHub for efficient code
+            collaboration and version management.
+          </p>
+          <p>
+            When I'm not coding, you can find me exploring new technologies,
+            playing the drums, or enjoying outdoor activities.
+          </p>
+        </div>
       </div>
     </section>
   </body>
