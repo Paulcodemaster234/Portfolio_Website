@@ -1,307 +1,450 @@
-/* =================================
-   HEADER & NAVBAR STYLES
-   ================================= */
-
-/* Header container - main navigation bar */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    gap: 20px;
-}
-
-/* Portfolio name/logo styling */
-#name {
-    margin: 0;
-    font-size: 24px;
-}
-
-/* Left header section - contains the logo */
-.head-left {
-    display: flex;
-    justify-content: center;
-}
-
-/* Right header section - contains navigation and theme toggle */
-.head-right {
-    display: flex;
-    justify-content: flex-end;
-    flex: 1;
-}
-
-/* Navigation bar container */
-.navbar {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    margin: 0;
-}
-
-/* Navbar list styles */
-.navbar ul {
-    display: flex;
-    list-style-type: none;
-    justify-content: space-between;
-    color: blue;
-    padding-left: 0;
-}
-
-/* Navigation links styling */
-.navbar a {
-    text-decoration: none;
-    color: blue;
-}
-
-/* Navigation links container */
-.nav-links {
-    display: flex;
-    gap: 20px;
-}
-
-/* Theme toggle button styling */
-#theme-button {
-    background-color: white;
-    border: none;
-}
+/* =====================================================================
+   STYLE — base, layout and page sections
+   Colors come from css/themes.css, reusable pieces (buttons, cards,
+   tags, toggle) live in css/components.css, motion in css/animations.css
+   ===================================================================== */
 
 /* =================================
-   HERO SECTION STYLES
+   BASE / RESET
    ================================= */
 
-/* Hero section main container */
-.hero-section {
-    display: flex;
-    margin-top: 100px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-}
-
-/* Hero profile image styling */
-.hero-image {
-    width: 600px;
-    height: 700px;
-    border-radius: 10px;
-    object-fit: cover;
-}
-
-/* Hero right side - content section */
-.hero-right {
-    align-content: center;
-}
-
-/* Hero section description text */
-.hero-section p {
-    font-size: 20px;
-    color: gray;
-}
-
-/* Hero title/role styling */
-.hero-title {
-    font-size: 28px;
-    color: blue;
-    font-weight: normal;
-}
-
-/* Hero name styling */
-.hero-name {
-    text-transform: uppercase;
-    font-size: 48px;
-    color: black;
-    font-weight: 100;
-}
-
-/* =================================
-   BUTTON STYLES
-   ================================= */
-
-/* Base button styling */
-.btn {
-    padding: 10px 20px;
-    border: 2px solid blue;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 10px;
-    text-decoration: none;
-    height: 50px;
-}
-
-/* Primary button - filled blue background */
-.btn-primary {
-    background-color: blue;
-    color: white;
-}
-
-/* Secondary button - white background with blue border */
-.btn-secondary {
-    background-color: white;
-    color: blue;
-}
-
-/* Button container */
-.hero-buttons {
-    margin-top: 30px;
-}
-
-/* Remove underline from button links */
-.hero-buttons a {
-    text-decoration: none;
-    border: none;
-}
-
-/* =================================
-   ABOUT ME SECTION STYLES
-   ================================= */
-
-/* About section container */
-.about-me {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 100px;
-}
-
-#about h2 {
-    font-size: 32px;
-    color: black;
-    margin-bottom: 20px;
-}
-
-/* Two-column layout container for about section */
-.divider {
-    display: flex;
-    gap: 100px;
-}
-
-/* About me section image styling */
-.about-me-image {
-    width: 400px;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-/* =================================
-   SKILLS & TECHNOLOGIES SECTION STYLES
-   ================================= */
-
-/* Skills & technologies section container */
-.skills-technologies {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-top: 100px;
-    padding: 70px 32px 100px;
-    background-color: #f7f7f8;
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
-#skills_Technologies h2 {
-    font-size: 42px;
-    color: #171923;
-    margin: 0 0 18px;
+html {
+    /* Keeps anchored sections from hiding under the sticky header */
+    scroll-padding-top: calc(var(--header-h) + 12px);
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--fs-base);
+    line-height: 1.6;
+    color: var(--text);
+    background-color: var(--bg);
+    -webkit-font-smoothing: antialiased;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+    margin: 0;
+}
+
+a {
+    color: inherit;
+}
+
+/* Visible keyboard focus everywhere, hidden for mouse clicks */
+:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    border-radius: var(--radius-sm);
+}
+
+/* Keyboard users can jump straight to the content */
+.skip-link {
+    position: absolute;
+    left: var(--space-4);
+    top: -100px;
+    z-index: 100;
+    padding: var(--space-2) var(--space-4);
+    background: var(--btn-bg);
+    color: var(--on-brand);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+}
+
+.skip-link:focus {
+    top: var(--space-4);
+}
+
+/* Centered content column used by every section */
+.container {
+    width: min(var(--container), 100% - 2 * var(--gutter));
+    margin-inline: auto;
+}
+
+/* Shared section spacing + heading block */
+.section {
+    padding-block: var(--section-pad);
+}
+
+.section--alt {
+    background-color: var(--bg-alt);
+}
+
+.section-header {
     text-align: center;
+    margin-bottom: clamp(2.5rem, 2rem + 2vw, 3.75rem);
+}
+
+.section-header h2 {
+    font-size: var(--fs-h2);
     font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: var(--space-3);
 }
 
-#skills_Technologies p {
-    font-size: 18px;
-    color: #6b7280;
-    margin: 0 0 58px;
-    text-align: center;
+.section-header p {
+    font-size: var(--fs-lg);
+    color: var(--text-muted);
+    margin: 0;
 }
 
-.Skills {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 22px;
-    width: min(1650px, 100%);
+/* =================================
+   HEADER & NAVBAR
+   ================================= */
+
+/* Sticky, translucent header */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: var(--header-bg);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--border);
 }
 
-#skills p {
+.header-inner {
     display: flex;
     align-items: center;
-    gap: 12px;
-    color: #262b36;
-    background-color: transparent;
-    border: 0;
-    border-radius: 0;
-    font-size: 16px;
-    font-weight: 500;
-    text-align: left;
+    justify-content: space-between;
+    gap: var(--space-5);
+    min-height: var(--header-h);
+}
+
+/* Portfolio name / logo */
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* Navigation: links + GitHub icon + theme toggle */
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    list-style: none;
     margin: 0;
     padding: 0;
 }
 
-#skills i {
-    width: 24px;
-    font-size: 24px;
-    line-height: 1;
-    text-align: center;
-    flex: 0 0 auto;
-}
-
-#skills .devicon-express-original,
-#skills .devicon-github-original {
-    color: #111827;
-}
-
-#skills div{
-    min-height: 300px;
-    background-color: #ffffff;
-    border: 1px solid #edf0f4;
-    border-radius: 8px;
-    box-shadow: 0 18px 34px rgba(17, 24, 39, 0.08);
-    padding: 34px 28px;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-content: start;
+.nav-actions {
+    display: flex;
     align-items: center;
-    gap: 22px 18px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-#skills div:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 24px 44px rgba(17, 24, 39, 0.12);
-}
-
-#skills h3 {
-    grid-column: 1 / -1;
-    color: #20242d;
-    font-size: 18px;
-    margin: 0 0 18px;
-    text-align: left;
-    line-height: 1.35;
-}
-
-@media (max-width: 1200px) {
-    .Skills {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-}
-
-@media (max-width: 800px) {
-    .Skills {
-        grid-template-columns: 1fr;
-    }
-
-    #skills div {
-        min-height: auto;
-    }
+    gap: var(--space-1);
+    padding-left: var(--space-2);
+    margin-left: var(--space-1);
+    border-left: 1px solid var(--border);
 }
 
 /* =================================
-   UTILITY STYLES
+   HERO
    ================================= */
 
-/* Blue text highlighting for emphasis */
-#blue {
-    color: blue;
-    font-weight: bold;
+.hero-section {
+    padding-block: clamp(3rem, 2rem + 5vw, 6rem);
 }
 
+.hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: clamp(2rem, 1rem + 5vw, 5rem);
+}
+
+/* Profile image — keeps the original tall portrait proportion (6:7) */
+.hero-image {
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 6 / 7;
+    object-fit: cover;
+    object-position: center top; /* photo is very tall — keep the head in frame */
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-inline: auto;
+}
+
+.hero-right {
+    text-align: center;
+}
+
+.hero-greeting {
+    font-size: var(--fs-lg);
+    color: var(--text-muted);
+    margin: 0 0 var(--space-2);
+}
+
+/* Name keeps the original thin, uppercase look */
+.hero-name {
+    font-size: var(--fs-hero);
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text);
+}
+
+.hero-title {
+    font-size: var(--fs-xl);
+    font-weight: 400;
+    color: var(--brand);
+    margin-top: var(--space-3);
+}
+
+.hero-description {
+    max-width: 52ch;
+    margin: var(--space-5) auto 0;
+    font-size: var(--fs-lg);
+    color: var(--text-muted);
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+}
+
+/* =================================
+   ABOUT ME
+   ================================= */
+
+.about-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(2rem, 1rem + 5vw, 5rem);
+}
+
+.about-me-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.about-me_right > p {
+    margin: 0 0 var(--space-4);
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+}
+
+/* "What I'm focused on" checklist */
+.focus-list {
+    list-style: none;
+    display: grid;
+    gap: var(--space-3);
+    margin: var(--space-4) 0 var(--space-5);
+    padding: 0;
+}
+
+.focus-list li {
+    display: flex;
+    gap: var(--space-3);
+    color: var(--text-muted);
+}
+
+.focus-list strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+/* Education + certification cards under the About text */
+.credentials {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+}
+
+/* =================================
+   SKILLS & TECHNOLOGIES
+   ================================= */
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+}
+
+/* =================================
+   FEATURED PROJECTS
+   ================================= */
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+}
+
+.projects-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-7);
+}
+
+/* =================================
+   CONTACT
+   ================================= */
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    align-items: center;
+    gap: clamp(2.5rem, 1rem + 6vw, 5.5rem);
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+/* =================================
+   FOOTER
+   ================================= */
+
+.site-footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    padding-block: var(--space-7);
+    font-size: var(--fs-sm);
+}
+
+.footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+}
+
+.footer-inner p {
+    margin: 0;
+}
+
+.footer-links {
+    display: flex;
+    gap: var(--space-5);
+}
+
+.footer-links a {
+    color: var(--footer-text);
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* =================================
+   UTILITIES
+   ================================= */
+
+/* Blue text highlighting for emphasis (was #blue) */
+.highlight {
+    color: var(--brand);
+    font-weight: 700;
+}
+
+/* Hidden visually, still read by screen readers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* =================================
+   RESPONSIVE
+   ================================= */
+
+@media (max-width: 1000px) {
+    .skills-grid,
+    .project-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 850px) {
+    .hero-inner,
+    .about-inner,
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-image {
+        max-width: 340px;
+    }
+
+    .about-me-image {
+        max-width: 320px;
+        margin-inline: auto;
+    }
+}
+
+@media (max-width: 700px) {
+    /* Name on the first row, navigation scrolls horizontally below it */
+    .header-inner {
+        flex-wrap: wrap;
+        gap: 0;
+        padding-block: var(--space-2);
+    }
+
+    .navbar {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .nav-links {
+        min-width: 0; /* lets the list shrink and scroll instead of overflowing */
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .skills-grid,
+    .project-grid,
+    .credentials {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+}

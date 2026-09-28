@@ -1,0 +1,130 @@
+/* =====================================================================
+   ANIMATIONS — page-load fade, hover movement, scroll reveal
+   ---------------------------------------------------------------------
+   All movement is wrapped in (prefers-reduced-motion: no-preference),
+   so visitors who ask their OS for less motion never see it. A final
+   safety net at the bottom neutralizes anything that slips through.
+   ===================================================================== */
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    /* Smooth scrolling for in-page nav links */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* ---------- Page-load fade-in ---------- */
+    .site-header {
+        animation: fade-in 400ms var(--ease) both;
+    }
+
+    /* Hero columns arrive one after the other */
+    .hero-left {
+        animation: fade-in-up 600ms var(--ease) 80ms both;
+    }
+
+    .hero-right {
+        animation: fade-in-up 600ms var(--ease) 180ms both;
+    }
+
+    /* ---------- Hover micro-interactions (transitions set in components.css) ---------- */
+    .btn:hover:not([disabled]) {
+        transform: translateY(-2px);
+    }
+
+    /* Contact form: spinning loader + status message slides in */
+    .form-submit.is-loading .spinner {
+        animation: spin 700ms linear infinite;
+    }
+
+    .form-status:not([hidden]) {
+        animation: fade-in-up 250ms var(--ease) both;
+    }
+
+    .btn:active {
+        transform: translateY(0);
+    }
+
+    .card--interactive:hover {
+        transform: translateY(-5px);
+    }
+
+    .icon-button:hover {
+        transform: rotate(-12deg);
+    }
+
+    .contact-item:hover .contact-icon {
+        transform: scale(1.08);
+    }
+
+    .project-links a:hover .arrow {
+        transform: translateX(3px);
+    }
+
+    .project-links .arrow {
+        display: inline-block;
+        transition: transform var(--dur-fast) var(--ease);
+    }
+
+    /* ---------- Scroll reveal ----------
+       Only hidden when JS is running (html.js, added in <head>), so the
+       content is always visible if JS fails. js/animations.js adds
+       .is-visible when the element scrolls into view. */
+    .js .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+            opacity 500ms var(--ease),
+            transform 500ms var(--ease);
+    }
+
+    .js .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ---------- Theme switch ----------
+   Colors blend briefly when the toggle is clicked. The class is added
+   by js/theme-switcher.js only during the switch, so the page load and
+   normal hovers aren't slowed down. */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+    transition:
+        background-color var(--dur) var(--ease),
+        border-color var(--dur) var(--ease),
+        color var(--dur) var(--ease) !important;
+}
+
+/* ---------- Safety net for reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

@@ -1,0 +1,544 @@
+/* =====================================================================
+   COMPONENTS — reusable UI pieces
+   Color/shadow changes on hover live here; movement (lift, slide) lives
+   in css/animations.css so it can be switched off for reduced motion.
+   ===================================================================== */
+
+/* Shared transition for every interactive element (all under 300ms) */
+.nav-link,
+.icon-button,
+.btn,
+.card,
+.project-links a,
+.contact-item a,
+.contact-icon,
+.tag {
+    transition:
+        color var(--dur-fast) var(--ease),
+        background-color var(--dur-fast) var(--ease),
+        border-color var(--dur-fast) var(--ease),
+        box-shadow var(--dur) var(--ease),
+        transform var(--dur) var(--ease);
+}
+
+/* =================================
+   NAV LINKS
+   ================================= */
+
+.nav-link {
+    display: inline-block;
+    position: relative;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    color: var(--brand);
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    background-color: var(--brand-soft);
+}
+
+/* Current section, set by js/main.js */
+.nav-link[aria-current="true"] {
+    background-color: var(--brand-soft);
+    color: var(--brand-hover);
+}
+
+/* =================================
+   ICON BUTTONS (GitHub link, theme toggle)
+   ================================= */
+
+.icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text);
+    font-size: 1.25rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.icon-button:hover {
+    background-color: var(--surface-muted);
+    border-color: var(--border);
+}
+
+.icon-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Theme toggle: show the moon in light mode, the sun in dark mode */
+.theme-toggle .icon-sun {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-sun {
+    display: block;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-moon {
+    display: none;
+}
+
+/* =================================
+   BUTTONS
+   ================================= */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: 48px;
+    padding: 0 var(--space-5);
+    border: 2px solid var(--btn-bg);
+    border-radius: var(--radius-sm);
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Filled blue */
+.btn-primary {
+    background-color: var(--btn-bg);
+    color: var(--on-brand);
+}
+
+.btn-primary:hover {
+    background-color: var(--btn-bg-hover);
+    border-color: var(--btn-bg-hover);
+    box-shadow: 0 8px 20px var(--brand-soft);
+}
+
+/* Outline blue */
+.btn-secondary {
+    background-color: transparent;
+    color: var(--brand);
+    border-color: var(--brand);
+}
+
+.btn-secondary:hover {
+    background-color: var(--brand-soft);
+}
+
+/* Quiet neutral outline (GitHub) */
+.btn-ghost {
+    background-color: transparent;
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.btn-ghost:hover {
+    border-color: var(--text-muted);
+    background-color: var(--surface-muted);
+}
+
+.btn i {
+    font-size: 1.15em;
+}
+
+/* =================================
+   CARD (base for skills, projects, credentials, contact)
+   ================================= */
+
+.card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+}
+
+.card--interactive:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+/* =================================
+   CREDENTIALS (education / certification)
+   ================================= */
+
+.credential {
+    padding: var(--space-5);
+}
+
+.credential-label {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand);
+}
+
+.credential h3 {
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: var(--space-1);
+}
+
+.credential p {
+    margin: 0;
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+}
+
+/* =================================
+   SKILL CARDS
+   ================================= */
+
+.skill-card {
+    padding: var(--space-6) var(--space-5);
+}
+
+.skill-card h3 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 1.125rem;
+    color: var(--text);
+    margin-bottom: var(--space-5);
+}
+
+.skill-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4) var(--space-3);
+    margin: 0;
+    padding: 0;
+}
+
+.skill-list li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-weight: 500;
+    color: var(--text);
+}
+
+.skill-list i {
+    width: 24px;
+    font-size: 24px;
+    line-height: 1;
+    text-align: center;
+    font-style: normal;
+    flex: 0 0 auto;
+}
+
+/* Monochrome devicons follow the text color so they work in dark mode */
+.skill-list .devicon-express-original,
+.skill-list .devicon-github-original,
+.skill-list .icon-mono {
+    color: var(--text);
+}
+
+/* =================================
+   PROJECT CARDS
+   ================================= */
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Gradient banner at the top of each card */
+.project-preview {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    padding: var(--space-5);
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    color: #ffffff;
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.project-date {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.project-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: var(--space-5) var(--space-5) var(--space-6);
+}
+
+.project-content h3 {
+    font-size: 1.3rem;
+    color: var(--text);
+    margin-bottom: var(--space-1);
+}
+
+.project-role {
+    margin: 0 0 var(--space-3);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--brand);
+}
+
+.project-content > p {
+    color: var(--text-muted);
+    margin: 0 0 var(--space-5);
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-5);
+}
+
+.tag {
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+    background-color: var(--surface-muted);
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+    font-weight: 500;
+}
+
+/* Links sit at the bottom of the card, whatever the text length */
+.project-links {
+    display: flex;
+    gap: var(--space-5);
+    margin-top: auto;
+    font-size: 0.95rem;
+}
+
+.project-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    color: var(--link);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.project-links a:hover {
+    color: var(--link-hover);
+}
+
+.project-status {
+    color: var(--text-subtle);
+    font-weight: 500;
+}
+
+/* =================================
+   CONTACT
+   ================================= */
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.contact-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    color: #ffffff;
+    font-size: 1.125rem;
+    font-weight: 700;
+    flex: 0 0 auto;
+}
+
+.contact-item h3 {
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 2px;
+}
+
+.contact-item a {
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+.contact-item a:hover {
+    color: var(--accent);
+}
+
+.contact-card {
+    padding: clamp(1.75rem, 1rem + 2vw, 2.75rem);
+}
+
+.contact-card h3 {
+    font-size: 1.25rem;
+    color: var(--text);
+    margin-bottom: var(--space-5);
+}
+
+/* =================================
+   CONTACT FORM
+   ================================= */
+
+.contact-form {
+    display: grid;
+    gap: var(--space-4);
+}
+
+/* Name + Email side by side */
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-field label {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--text);
+}
+
+.form-field input,
+.form-field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font: inherit;
+    color: var(--text);
+    background-color: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    transition:
+        border-color var(--dur-fast) var(--ease),
+        box-shadow var(--dur-fast) var(--ease),
+        background-color var(--dur-fast) var(--ease);
+}
+
+.form-field textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.form-field ::placeholder {
+    color: var(--text-subtle);
+    opacity: 1;
+}
+
+.form-field input:hover,
+.form-field textarea:hover {
+    border-color: var(--text-subtle);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: var(--focus-ring);
+    background-color: var(--surface);
+}
+
+/* Invalid state, set by js/contact-form.js */
+.form-field [aria-invalid="true"] {
+    border-color: var(--danger);
+}
+
+.form-field [aria-invalid="true"]:focus {
+    box-shadow: var(--danger-ring);
+}
+
+.field-error {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--danger);
+}
+
+/* Honeypot: kept off-screen so only spam bots fill it in */
+.hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* Submit button + loading spinner */
+.form-submit {
+    width: 100%;
+    margin-top: var(--space-2);
+}
+
+.form-submit[disabled] {
+    opacity: 0.75;
+    cursor: progress;
+}
+
+.spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+}
+
+.form-submit.is-loading .spinner {
+    display: inline-block;
+}
+
+/* Success / error / info message under the button */
+.form-status {
+    margin: 0;
+    padding: 12px 14px;
+    border-left: 3px solid currentColor;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-sm);
+}
+
+.form-status[data-type="success"] {
+    color: var(--success);
+    background-color: var(--success-soft);
+}
+
+.form-status[data-type="error"] {
+    color: var(--danger);
+    background-color: var(--danger-soft);
+}
+
+.form-status[data-type="info"] {
+    color: var(--brand);
+    background-color: var(--brand-soft);
+}
+
+.form-status a {
+    color: inherit;
+    font-weight: 600;
+}
+
+@media (max-width: 700px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,192 @@
+/* =====================================================================
+   THEMES — design tokens for light & dark mode
+   ---------------------------------------------------------------------
+   Every color in the site comes from a CSS custom property defined
+   here. Switching themes only swaps these values, so every component
+   updates at once.
+
+   How the active theme is chosen:
+   1. <html data-theme="light|dark">  -> set by js/theme-switcher.js
+   2. No data-theme (JS disabled)      -> falls back to the OS setting
+   ===================================================================== */
+
+/* ---------- Light theme (default) ---------- */
+:root {
+    color-scheme: light;
+
+    /* Brand — original colors, kept exactly */
+    --brand: #0000ff;               /* original "blue" (nav, titles, buttons) */
+    --brand-hover: #0000cc;
+    --brand-soft: rgba(0, 0, 255, 0.08);
+    --btn-bg: #0000ff;              /* filled button background */
+    --btn-bg-hover: #0000cc;
+    --on-brand: #ffffff;            /* text on top of --btn-bg */
+    --accent: #0077cc;              /* contact icons + link hover */
+    --link: #5b21b6;                /* project links */
+    --link-hover: #2563eb;
+    --gradient-start: #6682eb;      /* project preview gradient */
+    --gradient-end: #7951b8;
+
+    /* Neutrals — surfaces */
+    --bg: #ffffff;
+    --bg-alt: #f7f8fa;              /* alternating section background */
+    --surface: #ffffff;             /* cards */
+    --surface-muted: #f1f4f8;       /* tags, placeholders */
+    --border: #e6e9ef;
+    --header-bg: rgba(255, 255, 255, 0.82);
+
+    /* Neutrals — text */
+    --text: #111827;
+    --text-muted: #5f6b7a;
+    --text-subtle: #6b7280;
+
+    /* Footer */
+    --footer-bg: #1f252b;
+    --footer-text: #e5e7eb;
+
+    /* Elevation */
+    --shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.06);
+    --shadow-md: 0 18px 40px rgba(17, 24, 39, 0.08);
+    --shadow-lg: 0 24px 55px rgba(17, 24, 39, 0.13);
+    --focus-ring: 0 0 0 3px rgba(0, 0, 255, 0.35);
+
+    /* Forms & feedback */
+    --input-bg: #f9fafb;
+    --danger: #c81e1e;
+    --danger-soft: rgba(200, 30, 30, 0.08);
+    --danger-ring: 0 0 0 3px rgba(200, 30, 30, 0.25);
+    --success: #15803d;
+    --success-soft: rgba(21, 128, 61, 0.08);
+}
+
+/* ---------- Dark theme tokens ----------
+   Neutral dark greys (#121212 / #1e1e1e) instead of pure black.
+   Pure #0000ff is too dark to read on these backgrounds (~2.4:1), so text
+   uses a lighter tint of the same blue (#8095ff, ~6.8:1). Filled buttons
+   use a brighter blue that still passes contrast with white text. */
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --brand: #8095ff;
+    --brand-hover: #a3b2ff;
+    --brand-soft: rgba(128, 149, 255, 0.12);
+    --btn-bg: #3d5afe;
+    --btn-bg-hover: #5570ff;
+    --on-brand: #ffffff;
+    --accent: #0077cc;
+    --link: #b69cff;
+    --link-hover: #8fb4ff;
+    --gradient-start: #4f68c9;
+    --gradient-end: #643f9c;
+
+    --bg: #121212;
+    --bg-alt: #181818;
+    --surface: #1e1e1e;
+    --surface-muted: #2a2a2a;
+    --border: #2e2e2e;
+    --header-bg: rgba(18, 18, 18, 0.8);
+
+    --text: #ededed;
+    --text-muted: #a8a8a8;
+    --text-subtle: #9a9a9a;
+
+    --footer-bg: #0a0a0a;
+    --footer-text: #d4d4d4;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 18px 40px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 24px 55px rgba(0, 0, 0, 0.6);
+    --focus-ring: 0 0 0 3px rgba(128, 149, 255, 0.5);
+
+    --input-bg: #161616;
+    --danger: #f87171;
+    --danger-soft: rgba(248, 113, 113, 0.1);
+    --danger-ring: 0 0 0 3px rgba(248, 113, 113, 0.3);
+    --success: #4ade80;
+    --success-soft: rgba(74, 222, 128, 0.1);
+}
+
+/* ---------- No-JS fallback ----------
+   If JavaScript never runs, follow the operating system setting.
+   Same values as the dark block above. */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        color-scheme: dark;
+
+        --brand: #8095ff;
+        --brand-hover: #a3b2ff;
+        --brand-soft: rgba(128, 149, 255, 0.12);
+        --btn-bg: #3d5afe;
+        --btn-bg-hover: #5570ff;
+        --on-brand: #ffffff;
+        --accent: #0077cc;
+        --link: #b69cff;
+        --link-hover: #8fb4ff;
+        --gradient-start: #4f68c9;
+        --gradient-end: #643f9c;
+
+        --bg: #121212;
+        --bg-alt: #181818;
+        --surface: #1e1e1e;
+        --surface-muted: #2a2a2a;
+        --border: #2e2e2e;
+        --header-bg: rgba(18, 18, 18, 0.8);
+
+        --text: #ededed;
+        --text-muted: #a8a8a8;
+        --text-subtle: #9a9a9a;
+
+        --footer-bg: #0a0a0a;
+        --footer-text: #d4d4d4;
+
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+        --shadow-md: 0 18px 40px rgba(0, 0, 0, 0.45);
+        --shadow-lg: 0 24px 55px rgba(0, 0, 0, 0.6);
+        --focus-ring: 0 0 0 3px rgba(128, 149, 255, 0.5);
+
+        --input-bg: #161616;
+        --danger: #f87171;
+        --danger-soft: rgba(248, 113, 113, 0.1);
+        --danger-ring: 0 0 0 3px rgba(248, 113, 113, 0.3);
+        --success: #4ade80;
+        --success-soft: rgba(74, 222, 128, 0.1);
+    }
+}
+
+/* ---------- Non-color tokens (shared by both themes) ---------- */
+:root {
+    /* Typography — fluid sizes scale smoothly between phone and desktop */
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --fs-sm: 0.875rem;
+    --fs-base: 1rem;
+    --fs-lg: clamp(1.05rem, 0.98rem + 0.3vw, 1.2rem);
+    --fs-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.6rem);
+    --fs-h2: clamp(2rem, 1.6rem + 1.6vw, 2.625rem);
+    --fs-hero: clamp(2.5rem, 1.8rem + 3vw, 3.75rem);
+
+    /* Spacing */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.5rem;
+    --space-6: 2rem;
+    --space-7: 3rem;
+    --space-8: 4rem;
+    --section-pad: clamp(4rem, 3rem + 5vw, 7rem);
+    --gutter: clamp(1rem, 0.5rem + 2.5vw, 2rem);
+    --container: 1160px;
+
+    /* Shape */
+    --radius-sm: 6px;
+    --radius: 10px;
+    --radius-lg: 14px;
+    --radius-pill: 999px;
+
+    /* Motion — every interactive transition stays under 300ms */
+    --dur-fast: 150ms;
+    --dur: 250ms;
+    --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    --header-h: 68px;
+}
